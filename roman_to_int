@@ -1,0 +1,63 @@
+def roman_to_int(str):
+    romans = {
+        "I" : 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000
+    }
+
+    if len(str) == 1:
+        return romans.get(str)
+    else:
+        sum = 0
+        i = len(str)-1
+        while (i >= 0):
+            print(i)
+            curr_letter = str[i]
+            if curr_letter == "I" or i == 0:
+                sum = sum + romans.get(curr_letter)
+                i = i -1
+            else:
+                prev_letter = str[i-1]
+                if prev_letter == "I":
+                    if curr_letter == "V":
+                        sum = sum + 4
+                        i = i -2
+                    elif curr_letter == "X":
+                        sum = sum + 9
+                        i = i -2
+                    else:
+                        sum = sum + romans.get(curr_letter)
+                        i = i - 1
+                elif prev_letter == "X":
+                    if curr_letter == "L":
+                        sum = sum + 40
+                        i = i -2
+                    elif curr_letter == "C":
+                        sum = sum + 90
+                        i = i -2
+                    else:
+                        sum = sum + romans.get(curr_letter)
+                        i = i - 1
+                elif prev_letter == "C":
+                    if curr_letter == "D":
+                        sum = sum + 400
+                        i = i -2
+                    elif curr_letter == "M":
+                        sum = sum + 900
+                        i = i -2
+                    else:
+                        sum = sum + romans.get(curr_letter)
+                        i = i - 1
+                else:
+                    sum = sum + romans.get(curr_letter)
+                    i = i - 1
+
+        return sum
+
+        
+
+print(roman_to_int("MCMXCIV"))
